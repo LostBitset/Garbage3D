@@ -16,7 +16,14 @@ def sizeChanged(app):
     app.w, app.h = app.width, app.height
     app.cx, app.cy = app.w//2, app.h//2
 
+def keyPressed(app, event):
+    if event.key == 'a':
+        app.viewer.cam.ctr[0] -= 0.2
+    elif event.key == 'b':
+        app.viewer.cam.ctr[0] += 0.2
+
 def redrawAll(app, canvas):
+    canvas.create_rectangle(0, 0, app.w, app.h, fill='#000')
     app.viewer.render(canvas)
 
 if __name__ == '__main__':
