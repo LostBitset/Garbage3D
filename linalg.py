@@ -89,3 +89,11 @@ class Mat(object):
             for j in range(self.odim):
                 resList.append(dot(self.row(i), other.col(j)))
         return (self.__class__)(resList, self.odim, other.idim)
+
+# Convert into homogenous coordinates
+def toH(v):
+    return ( *v, 1 )
+
+# Convert from homogenous coordinates (the perspective divide)
+def pDiv(v):
+    return ( ( i/v[-1] for i in v[:-1] ), )
