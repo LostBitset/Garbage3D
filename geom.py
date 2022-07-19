@@ -2,9 +2,6 @@
 
 from linalg import *
 
-# A geometry
-Geom = namedtuple('Geom', ('verts', 'tris', 'aabb'))
-
 def makeAABB(verts):
     -...
 
