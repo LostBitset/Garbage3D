@@ -38,20 +38,26 @@ class Mat(object):
         eps = 10**-6
         cnt = len(cols) 
         if odim == None and idim == None:
-            raise 'No parts of mat size given'
+            raise Exception('No parts of mat size given')
         elif odim == None:
             if cnt % idim != 0:
-                raise f'Given idim {idim} must be fac of {cnt}'
+                raise Exception(
+                    f'Given idim {idim} must be fac of {cnt}'
+                )
             else:
                 odim = cnt // idim
         elif idim == None:
             if cnt % odim != 0:
-                raise f'Given odim {odim} must be fac of {cnt}'
+                raise Exception(
+                    f'Given odim {odim} must be fac of {cnt}'
+                )
             else:
                 idim = cnt // odim
         else:
             if (odim*idim) != cnt:
-                raise f'No {odim}x{idim} mat has {cnt} elems'
+                raise Exception(
+                    f'No {odim}x{idim} mat has {cnt} elems'
+                )
         self.odim, self.idim = odim, idim
         self.cols = cols
 

@@ -21,10 +21,19 @@ class Geom(object):
         self.aabb = makeAABB(self.verts)
         self.offset = offset
 
-# Perform a perspective transform
-def persp(cam, v):
-    cameraMat = Mat([
-        -...
+def makeCMat(ctr):
+    return Mat([
+        1, 0, 0, 0, 1, 0, 0, 0, 1,
+        *ctr,
     ], 3, 4)
-    homogenous2D = cameraMat * toH(v)
-    return pDiv(homogenous2D)
+
+class Camera(object):
+    __slots__ = 'ctr', 'mat'
+    def __init__(self, ctr):
+        self.ctr = ctr
+        self.mat = makeCMat(self.ctr)
+
+    # Perform a perspective transform
+    def persp(self, v):
+        homogenous2D = self.mat * toH(v)
+        return pDiv(homogenous2D)
