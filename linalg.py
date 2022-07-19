@@ -88,13 +88,3 @@ class Mat(object):
             for j in range(self.odim):
                 resList.append(dot(self.row(i), other.col(j)))
         return (self.__class__)(resList, self.odim, other.idim)
-
-# 3x4 Matrix-vector multiplication
-# The matrix should be in column-major order
-def mat3x4(mat, v):
-    return (
-        (v[0]*mat[0]) + (v[1]*mat[3]) + (v[2]*mat[6]) + (v[3]*mat[9]),
-        (v[0]*mat[1]) + (v[1]*mat[4]) + (v[2]*mat[7]) + (v[3]*mat[10]),
-        (v[0]*mat[2]) + (v[1]*mat[5]) + (v[2]*mat[8]) + (v[3]*mat[11]),
-    )
-
