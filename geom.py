@@ -7,7 +7,7 @@ def components(vecs, n):
         yield [ v[i] for v in vecs ]
 
 def makeAABB(verts):
-    xs, ys, zs = components(verts)
+    xs, ys, zs = components(verts, 3)
     return (
         [ min(xs), min(ys), min(zs) ],
         [ max(xs), max(ys), max(zs) ],
@@ -20,6 +20,7 @@ class Geom(object):
         self.tris = tris # Tuple3[IndexInto[self.verts]]
         self.aabb = makeAABB(self.verts) # Tuple2[Coord3]
 
+# A camera matrix (no rotation for now)
 def makeCMat(ctr):
     return Mat([
         1, 0, 0, 0, 1, 0, 0, 0, 1,
@@ -36,6 +37,10 @@ class Camera(object):
     def persp(self, v):
         homogenous2D = self.mat * toH(v)
         return pDiv(homogenous2D)
+
+    # Get the camera's image plane (a single z value for now)
+    def imPlane(self):
+        return self.ctr[2]
 
 if __name__ == '__main__':
     cam = Camera([1, 1, 2])

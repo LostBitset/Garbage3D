@@ -2,11 +2,12 @@
 
 from cmu_112_graphics import *
 
-from scenes import *
+from worlds import *
+from viewport import *
 
 def appStarted(app):
-    # The current scene is a class
-    app.scene = NotImplemented
+    app.world = CubeWld()
+    app.viewer = Viewport(Camera([0, 0, -2]), app.world)
     # The size changed from undefined to something, didn't it?
     sizeChanged(app)
 
@@ -16,7 +17,7 @@ def sizeChanged(app):
     app.cx, app.cy = app.w//2, app.h//2
 
 def redrawAll(app, canvas):
-    raise NotImplementedError
+    app.viewer.render(canvas)
 
 if __name__ == '__main__':
     runApp(
