@@ -17,17 +17,17 @@ class _ZeroVecT(object):
 if 'ZeroVec' not in globals():
     ZeroVec = object.__new__(_ZeroVecT)
 
-# Add vectors (which are actually tuples)
+# Add vectors
 def add(a, b):
     if a == ZeroVec:
         return b
-    return ( *( i + j for i in a for j in b ), )
+    return [ i + j for i in a for j in b ]
 
-# Scale vectors (which are actually tuples)
+# Scale vectors
 def sc(a, scalar):
-    return ( *( i * scalar for i in a ), )
+    return [ i * scalar for i in a ]
 
-# Dot product of vectors (which are actually tuples)
+# Dot product of vectors
 def dot(a, b):
     return sum( i * j for i in a for j in b )
 
@@ -92,8 +92,8 @@ class Mat(object):
 
 # Convert into homogenous coordinates
 def toH(v):
-    return ( *v, 1 )
+    return [ *v, 1 ]
 
 # Convert from homogenous coordinates (the perspective divide)
 def pDiv(v):
-    return ( ( i/v[-1] for i in v[:-1] ), )
+    return [ i/v[-1] for i in v[:-1] ]

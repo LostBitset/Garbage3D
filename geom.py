@@ -2,8 +2,16 @@
 
 from linalg import *
 
+def components(vecs, n):
+    for i in range(n):
+        yield [ v[i] for v in vecs ]
+
 def makeAABB(verts):
-    -...
+    xs, ys, zs = components(verts)
+    return (
+        min(xs), min(ys), min(zs),
+        max(xs), max(ys), max(zs),
+    )
 
 class Geom(object):
     __slots__ = 'tris', 'verts', 'aabb', 'offset'
