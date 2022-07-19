@@ -31,6 +31,7 @@ def sc(a, scalar):
 def dot(a, b):
     return sum( i * j for i in a for j in b )
 
+# A matrix with elements stored in column-major order
 class Mat(object):
     __slots__ = 'odim', 'idim', 'cols'
     def __init__(self, cols, odim=None, idim=None):
