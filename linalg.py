@@ -57,29 +57,36 @@ class Mat(object):
     # getting a column
     def col(self, n):
         start = range(0, self.odim*self.idim, self.odim)[n]
-        return self.cols.append(
-            self.cols[start:start+self.odim]
-        )
+        return self.cols[start:start+self.odim]
+    
+    # getting a row
+    def row(self, n):
+        return [
+            self.cols[i] \
+            for i in range(n, self.odim*self.idim, self.idim)
+        ]
     
     # transpose
     def t(self):
-        -...
+        return Mat(
+            [ self.row(i) for i in range(self.odim) ],
+            odim=self.odim, idim=self.idim
+        )
     
     # mat-vec-mul
     def __mul__(self, v):
         res = ZeroVec
-        for i in range(self.odim):
-            res = add(res, sc(self.cols[i], v[i]))
+        for i in range(self.idim):
+            res = add(res, sc(self.col(i), v[i]))
         return res
     
     # mat-mat-mul
     def __matmul__(self, other):
         assert isinstance(other, self.__class__)
         resList = []
-        selfT = self.t()
         for i in range(other.idim):
             for j in range(self.odim):
-                resList.append(dot(selfT.col(i), other.col(j)))
+                resList.append(dot(self.row(i), other.col(j)))
         return (self.__class__)(resList, self.odim, other.idim)
 
 # 3x4 Matrix-vector multiplication
