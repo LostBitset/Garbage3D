@@ -21,7 +21,8 @@ if 'ZeroVec' not in globals():
 def add(a, b):
     if a == ZeroVec:
         return b
-    return [ i + j for i in a for j in b ]
+    assert len(a) == len(b)
+    return [ a[i]+b[i] for i in range(len(a)) ]
 
 # Scale vectors
 def sc(a, scalar):
@@ -29,7 +30,12 @@ def sc(a, scalar):
 
 # Dot product of vectors
 def dot(a, b):
-    return sum( i * j for i in a for j in b )
+    assert len(a) == len(b)
+    return sum( a[i]*b[i] for i in range(len(a)) )
+
+# Negate a vector
+def neg(a):
+    return [ -i for i in a ]
 
 # A matrix with elements stored in column-major order
 class Mat(object):

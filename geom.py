@@ -24,7 +24,7 @@ class Geom(object):
 def makeCMat(ctr):
     return Mat([
         1, 0, 0, 0, 1, 0, 0, 0, 1,
-        *ctr,
+        *neg(ctr),
     ], 3, 4)
 
 class Camera(object):
@@ -37,3 +37,7 @@ class Camera(object):
     def persp(self, v):
         homogenous2D = self.mat * toH(v)
         return pDiv(homogenous2D)
+
+if __name__ == '__main__':
+    cam = Camera([1, 1, 1])
+    print(cam.persp([0, 0, 0]))
