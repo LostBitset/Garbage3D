@@ -6,9 +6,13 @@ from worlds import *
 from viewport import *
 
 def appStarted(app):
-    app.camCtr = [0, 0, -1]
+    app.camCtr = [2, 2, 2]
+    app.camRoll = (pi/2)
     app.world = CubeWld()
-    app.viewer = Viewport(Camera(app.camCtr), app.world)
+    app.viewer = Viewport(
+        Camera(app.camCtr, roll=app.camRoll),
+        app.world,
+    )
     # The size changed from undefined to something, didn't it?
     sizeChanged(app)
 
@@ -18,7 +22,7 @@ def sizeChanged(app):
     app.cx, app.cy = app.w//2, app.h//2
 
 def keyPressed(app, event):
-    step = 0.2
+    step, angleStep = 0.2, (pi/16)
     if event.key == 'a':
         app.camCtr[0] -= step
     elif event.key == 'd':
@@ -31,10 +35,14 @@ def keyPressed(app, event):
         app.camCtr[2] -= step
     elif event.key == 'c':
         app.camCtr[2] += step
+    elif event.key == 'q':
+        app.camRoll -= angleStep
+    elif event.key == 'f':
+        app.camRoll += angleStep
 
 def redrawAll(app, canvas):
     canvas.create_rectangle(0, 0, app.w, app.h, fill='#000')
-    app.viewer.cam = Camera(app.camCtr)
+    app.viewer.cam = Camera(app.camCtr, roll=app.camRoll)
     app.viewer.render(canvas)
 
 if __name__ == '__main__':
