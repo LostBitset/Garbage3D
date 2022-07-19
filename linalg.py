@@ -70,7 +70,7 @@ class Mat(object):
     def row(self, n):
         return [
             self.cols[i] \
-            for i in range(n, self.odim*self.idim, self.idim)
+            for i in range(n, self.odim*self.idim, self.odim)
         ]
     
     # transpose
