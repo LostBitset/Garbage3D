@@ -9,17 +9,16 @@ def components(vecs, n):
 def makeAABB(verts):
     xs, ys, zs = components(verts)
     return (
-        min(xs), min(ys), min(zs),
-        max(xs), max(ys), max(zs),
+        [ min(xs), min(ys), min(zs) ],
+        [ max(xs), max(ys), max(zs) ],
     )
 
 class Geom(object):
-    __slots__ = 'tris', 'verts', 'aabb', 'offset'
-    def __init__(self, tris, offset):
-        self.tris = tris
-        self.verts = list({ j for i in self.tris for j in i })
-        self.aabb = makeAABB(self.verts)
-        self.offset = offset
+    __slots__ = 'verts', 'tris', 'aabb'
+    def __init__(self, verts, tris):
+        self.verts = verts # List[Coord3]
+        self.tris = tris # Tuple3[IndexInto[self.verts]]
+        self.aabb = makeAABB(self.verts) # Tuple2[Coord3]
 
 def makeCMat(ctr):
     return Mat([
@@ -39,5 +38,5 @@ class Camera(object):
         return pDiv(homogenous2D)
 
 if __name__ == '__main__':
-    cam = Camera([1, 1, 1])
-    print(cam.persp([0, 0, 0]))
+    cam = Camera([1, 1, 2])
+    print(cam.persp([0, 0, 4]))
