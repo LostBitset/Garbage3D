@@ -18,4 +18,8 @@ class Geom(object):
 
 # Perform a perspective transform
 def persp(cam, v):
-    cameraMat = 
+    cameraMat = Mat([
+        -...
+    ], 3, 4)
+    homogenous2D = cameraMat * toH(v)
+    return pDiv(homogenous2D)
