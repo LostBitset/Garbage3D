@@ -69,7 +69,7 @@ class Mat(object):
     # transpose
     def t(self):
         return Mat(
-            [ self.row(i) for i in range(self.odim) ],
+            [ j for i in range(self.odim) for j in self.row(i) ],
             odim=self.odim, idim=self.idim
         )
     
