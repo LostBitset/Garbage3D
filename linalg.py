@@ -96,11 +96,14 @@ class Mat(object):
     # mat-mat-mul
     def __matmul__(self, other):
         assert isinstance(other, self.__class__)
+        assert other.odim == self.idim
         resList = []
-        for i in range(other.idim):
-            for j in range(self.odim):
-                resList.append(dot(self.row(i), other.col(j)))
-        return (self.__class__)(resList, self.odim, other.idim)
+        for i in range(self.odim):
+            for j in range(other.idim):
+                resList.append(
+                    dot(self.row(i), other.col(j))
+                )
+        return (self.__class__)(resList, other.idim, self.odim).t()
 
 # Convert into homogenous coordinates
 def toH(v):
