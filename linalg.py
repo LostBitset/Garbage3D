@@ -83,7 +83,7 @@ class Mat(object):
     def t(self):
         return Mat(
             [ j for i in range(self.odim) for j in self.row(i) ],
-            odim=self.odim, idim=self.idim
+            odim=self.idim, idim=self.odim,
         )
     
     # mat-vec-mul
