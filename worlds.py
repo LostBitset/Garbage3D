@@ -25,4 +25,5 @@ def cube():
 
 class CubeWld(ABC):
     def visibleGeom(self, imPlane):
-        yield cube()
+        if imPlane.side([0, 0, 0]) > 0:
+            yield cube()

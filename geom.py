@@ -21,6 +21,18 @@ class Geom(object):
         self.tris = tris # Tuple3[IndexInto[self.verts]]
         self.aabb = makeAABB(self.verts) # Tuple2[Coord3]
 
+class Plane(object):
+    __slots__ = 'pt', 'normal'
+    def __init__(self, pt, normal):
+        self.pt = pt
+        self.normal = normal
+    
+    def side(self, v):
+        return dot(
+            self.normal,
+            add(v, neg(self.pt)),
+        )
+
 # A camera matrix (coordinate space relative to camera center)
 def makeCamMat(a, b, c):
     return Mat([
@@ -48,7 +60,7 @@ class Camera(object):
 
     # Get the camera's image plane (a single z value for now)
     def imPlane(self):
-        return self.ctr[2]
+        return Plane([0, 0, -1], [0, 0, 1])
 
 if __name__ == '__main__':
     cam = Camera([1, 1, 2])

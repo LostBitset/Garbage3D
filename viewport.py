@@ -30,6 +30,4 @@ class Viewport(object):
         canvas.create_polygon(
             *f(in2D[0]), *f(in2D[1]), *f(in2D[2]),
             fill='', outline='blue',
-        )
-
-# TODO convert to pixels
+        ) 
