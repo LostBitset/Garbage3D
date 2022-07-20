@@ -34,7 +34,7 @@ class Plane(object):
         )
 
 # A camera matrix (coordinate space relative to camera center)
-def makeCamMat(a, b, c):
+def rotMat(a, b, c):
     return Mat([
         cos(a)*cos(b), sin(a)*cos(b), -sin(b),
         (cos(a)*sin(b)*sin(c))-(sin(a)*cos(c)),
@@ -43,19 +43,19 @@ def makeCamMat(a, b, c):
         (cos(a)*sin(b)*cos(c))+(sin(a)*sin(c)),
         (sin(a)*sin(b)*cos(c))-(cos(a)*sin(c)),
         cos(b)*cos(c),
-        0, 0, 0,
-    ], 3, 4)
+    ], 3, 3)
 
 class Camera(object):
-    __slots__ = 'ctr', 'rot'
+    __slots__ = 'ctr', 'rot', 'rotP'
     def __init__(self, ctr, yaw=0, pitch=0, roll=(pi/2)):
         self.ctr = ctr
-        self.rot = makeCamMat(yaw, pitch, roll)
+        self.rot = rotMat(yaw, pitch, roll)
+        self.rotP = Mat([*self.rot.cols, 0, 0, 0], 3, 4)
 
     # Perform a perspective transform
     def persp(self, v):
         v = add(v, neg(self.ctr))
-        homogenous2D = self.rot * toH(v)
+        homogenous2D = self.rotP * toH(v)
         return pDiv(homogenous2D)
 
     # Get the camera's image plane (a single z value for now)
