@@ -45,12 +45,27 @@ def rotMat(a, b, c):
         cos(b)*cos(c),
     ], 3, 3)
 
+def perspective(flen):
+    return Mat([
+        1, 0, 0,
+        0, 1, 0,
+        0, 0, (1/flen),
+        0, 0, 0,
+    ], 3, 4)
+
 class Camera(object):
-    __slots__ = 'ctr', 'rot', 'rotP'
-    def __init__(self, ctr, yaw=0, pitch=0, roll=(pi/2)):
+    __slots__ = 'ctr', 'flen', 'rot', 'rotP'
+    def __init__(self, ctr, flen=1, yaw=0, pitch=0, roll=(pi/2)):
         self.ctr = ctr
+        self.flen = flen
         self.rot = rotMat(yaw, pitch, roll)
-        self.rotP = Mat([*self.rot.cols, 0, 0, 0], 3, 4)
+        rotH = Mat([
+            *self.rot.col(0), 0,
+            *self.rot.col(1), 0,
+            *self.rot.col(2), 0,
+            0, 0, 0, 1,
+        ], 4, 4)
+        self.rotP = perspective(flen) @ rotH
 
     # Perform a perspective transform
     def persp(self, v):
