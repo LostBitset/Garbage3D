@@ -1,13 +1,13 @@
 # Kaidun (by HktOverload)
 
-from geom import *
+from camera import *
 
-# Returns a subgeometry that corresponds to the part of a tri
-# in front of the image plane
-# This can be either a tri, a quad, or None if the entire tri
-# is behind the image plane
-def forceVisible(tri, verts, imPlane):
-    return tri # TEMP
+# Check if all items of an iterable are in a container
+def allIn(itr, container):
+    for i in itr:
+        if i not in container:
+            return False
+    return True
 
 class Viewport(object):
     __slots__ = 'cam', 'geomsrc', 'pxSize'
@@ -17,21 +17,16 @@ class Viewport(object):
         self.pxSize = pxSize
     
     def render(self, app, canvas):
-        imPlane = self.cam.imPlane()
         for g in self.geomsrc(app):
-            memo = {
-                i: self.cam.persp(g.verts[i]) \
-                    for i in range(len(g.verts))
-            }
+            memo, visible = {}, set()
+            for i in range(len(g.verts)):
+                memo[i] = self.cam.persp(g.verts[i])
+                if self.cam.isVisible(g.verts[i]):
+                    visible.add(i)
             for tri in g.tris:
-                visible = forceVisible(tri, g.verts, imPlane)
-                if len(visible) == 3:
+                if allIn(tri, visible):
                     self.renderTriAt(canvas, [
-                        memo[i] for i in visible
-                    ])
-                elif len(visible) == 4:
-                    self.renderQuadAt(canvas, [
-                        memo[i] for i in visible
+                        memo[i] for i in tri
                     ])
     
     def renderTriAt(self, canvas, in2D):
