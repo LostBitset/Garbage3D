@@ -12,12 +12,10 @@ A game (more specifically, a 15-112 term project).
 ### Goals for the project
 
 - Uses only `cmu_112_graphics` (tkinter based)
-- Procedural terrain that is generated along with shadowplanes
+- Procedural terrain
 - Full 3D
 - Dynamic subdivision to counteract the stupidity of flat shading
-- Planar shadow mapping for kinda unrealistic but fast shadow effects
 - Distance fog and a day-night cycle
-- HUD text effects without a custom font
 - Flybacks are implemented using a motion planner to avoid terrain obstructions
 
 ### Gameplay
