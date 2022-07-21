@@ -1,15 +1,8 @@
 # Kaidun (by HktOverload)
 
-from abc import ABC, abstractmethod
-
 from geom import *
 
-class World(ABC):
-    @abstractmethod
-    def visibleGeom(self, imPlane):
-        pass
-
-def cube():
+def halfCube():
     return Geom(
         [
             [0, 0, 0], [1, 0, 0], [0, 1, 0], # 0 1 2
@@ -23,7 +16,3 @@ def cube():
         ]
     )
 
-class CubeWld(ABC):
-    def visibleGeom(self, imPlane):
-        if True or imPlane.side([0, 0, 0]) > 0:
-            yield cube()

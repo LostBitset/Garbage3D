@@ -2,16 +2,16 @@
 
 from cmu_112_graphics import *
 
-from worlds import *
+from scenes import *
 from viewport import *
 
 def appStarted(app):
     app.camCtr = [2, 2, 2]
     app.camRoll = (pi/2)
-    app.world = CubeWld()
+    app.scene = CubeScene
     app.viewer = Viewport(
         Camera(app.camCtr, roll=app.camRoll),
-        app.world,
+        lambda app: app.scene.toGeometry(app),
     )
     # The size changed from undefined to something, didn't it?
     sizeChanged(app)
@@ -43,7 +43,7 @@ def keyPressed(app, event):
 def redrawAll(app, canvas):
     canvas.create_rectangle(0, 0, app.w, app.h, fill='#000')
     app.viewer.cam = Camera(app.camCtr, roll=app.camRoll)
-    app.viewer.render(canvas)
+    app.viewer.render(app, canvas)
 
 if __name__ == '__main__':
     runApp(
