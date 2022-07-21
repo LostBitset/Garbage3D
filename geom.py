@@ -75,7 +75,9 @@ class Camera(object):
 
     # Get the camera's image plane (a single z value for now)
     def imPlane(self):
-        return Plane([0, 0, -1], [0, 0, 1])
+        normal = self.rot * [0, 0, 1]
+        pt = add(self.ctr, sc(normal, self.flen))
+        return Plane(pt, normal)
 
 if __name__ == '__main__':
     cam = Camera([1, 1, 2])
