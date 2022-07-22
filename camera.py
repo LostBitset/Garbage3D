@@ -1,6 +1,7 @@
 # Kaidun (by HktOverload)
 
 from geom import *
+from math import pi
 
 def perspective(flen):
     return Mat([

@@ -1,7 +1,7 @@
 # Kaidun (by HktOverload)
 
 from linalg import *
-from math import sin, cos, pi
+from math import sin, cos
 
 def components(vecs, n):
     for i in range(n):
