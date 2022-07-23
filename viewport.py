@@ -36,21 +36,3 @@ class Viewport(object):
                     render(self, canvas, [
                         memo[i] for i in tri
                     ])
-    
-    def renderTriAt(self, canvas, in2D):
-        self.renderPolyAt(canvas, in2D)
-    
-    def renderQuadAt(self, canvas, in2D):
-        self.renderPolyAt(canvas, in2D)
-    
-    def renderPolyAt(self, canvas, in2D):
-        sX, sY = self.pxSize[0]//2, self.pxSize[1]//2
-        def f(coord): # Converts from world-space to screen space
-            return (
-                int(coord[0] * sX + sX),
-                int(coord[1] * sY + sY),
-            )
-        canvas.create_polygon(
-            *[ j for i in in2D for j in f(i) ],
-            fill='', outline='blue',
-        )
