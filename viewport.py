@@ -17,14 +17,6 @@ class Viewport(object):
         self.pxSize = pxSize
     
     def render(self, app, canvas):
-        (self.geomsrc(app)[0][1])(
-            self, canvas,
-            [
-                self.cam.persp(i) for i in \
-                    [(0, 0, 0), (0.1, 0, 0), (0, 0, 0.1)]
-            ],
-        )
-        print(self.cam.imPlane.side([0, 0, 0]))
         for geom, render in (self.geomsrc)(app):
             memo, visible = {}, set()
             for i in range(len(geom.verts)):
