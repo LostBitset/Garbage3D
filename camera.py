@@ -24,7 +24,7 @@ class Camera(object):
             0, 0, 0, 1,
         ], 4, 4)
         self.rotP = perspective(flen) @ rotH
-        normal = self.rot * [0, 0, 1]
+        normal = self.rot.t() * [0, 0, 1]
         pt = self.ctr
         self.imPlane = Plane(pt, normal)
 
@@ -36,4 +36,4 @@ class Camera(object):
 
     # Check if a vertex is visible
     def isVisible(self, v):
-        return self.imPlane.side(v) > 0.1
+        return self.imPlane.side(v) < -0.1
