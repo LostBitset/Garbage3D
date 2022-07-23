@@ -17,15 +17,23 @@ class Viewport(object):
         self.pxSize = pxSize
     
     def render(self, app, canvas):
-        for g in self.geomsrc(app):
+        (self.geomsrc(app)[0][1])(
+            self, canvas,
+            [
+                self.cam.persp(i) for i in \
+                    [(0, 0, 0), (0.1, 0, 0), (0, 0, 0.1)]
+            ],
+        )
+        print(self.cam.isVisible([0, 0, 0]))
+        for geom, render in (self.geomsrc)(app):
             memo, visible = {}, set()
-            for i in range(len(g.verts)):
-                memo[i] = self.cam.persp(g.verts[i])
-                if self.cam.isVisible(g.verts[i]):
+            for i in range(len(geom.verts)):
+                memo[i] = self.cam.persp(geom.verts[i])
+                if self.cam.isVisible(geom.verts[i]):
                     visible.add(i)
-            for tri in g.tris:
+            for tri in geom.tris:
                 if allIn(tri, visible):
-                    self.renderTriAt(canvas, [
+                    render(self, canvas, [
                         memo[i] for i in tri
                     ])
     

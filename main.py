@@ -11,7 +11,7 @@ def appStarted(app):
     app.scene = CubeScene
     app.viewer = Viewport(
         Camera(app.camCtr, roll=app.camRoll),
-        lambda app: app.scene.toGeometry(app),
+        lambda app: app.scene.allGeometry(app),
     )
     # The size changed from undefined to something, didn't it?
     sizeChanged(app)

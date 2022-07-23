@@ -4,6 +4,8 @@ import abc
 
 from scene_components import *
 
+import rendering as r
+
 class Scene(abc.ABC):
 
     @staticmethod
@@ -14,11 +16,10 @@ class Scene(abc.ABC):
 
     @staticmethod
     @abc.abstractmethod
-    def toGeometry(app):
-        # Generates the geometry according to app
-        # This can return either the new geometry, or a new scene
-        # If the return is an instance of Scene, than that new scene
-        # takes control
+    def allGeometry(app):
+        # A list containing (Geom, Renderer) tuples for everything
+        # within this scene
+        # Basically just a geomsrc
         pass
 
 class CubeScene(Scene):
@@ -28,5 +29,5 @@ class CubeScene(Scene):
         raise NotImplementedError('Event system does not yet exist')
 
     @staticmethod
-    def toGeometry(app):
-        return [ halfCube() ]
+    def allGeometry(app):
+        return [ r.wireframe(halfCube()) ]

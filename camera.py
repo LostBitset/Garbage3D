@@ -25,7 +25,8 @@ class Camera(object):
         ], 4, 4)
         self.rotP = perspective(flen) @ rotH
         normal = self.rot * [0, 0, 1]
-        self.imPlane = Plane(self.ctr, normal)
+        pt = self.ctr
+        self.imPlane = Plane(pt, normal)
 
     # Perform a perspective transform
     def persp(self, v):
@@ -35,4 +36,4 @@ class Camera(object):
 
     # Check if a vertex is visible
     def isVisible(self, v):
-        return self.imPlane.side(v) > (10**-6)
+        return self.imPlane.side(v) > 0
