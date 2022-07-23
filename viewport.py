@@ -24,7 +24,7 @@ class Viewport(object):
                     [(0, 0, 0), (0.1, 0, 0), (0, 0, 0.1)]
             ],
         )
-        print(self.cam.isVisible([0, 0, 0]))
+        print(self.cam.imPlane.side([0, 0, 0]))
         for geom, render in (self.geomsrc)(app):
             memo, visible = {}, set()
             for i in range(len(geom.verts)):

@@ -36,4 +36,4 @@ class Camera(object):
 
     # Check if a vertex is visible
     def isVisible(self, v):
-        return self.imPlane.side(v) > 0
+        return self.imPlane.side(v) > 0.1
