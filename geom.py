@@ -24,9 +24,9 @@ class Geom(object):
         self.data = data # Dict[Str,List[Any]]
         self.aabb = makeAABB(self.verts) # Tuple2[Coord3]
 
-    def minDistTo(self, pt):
+    def centroidDist(self, pt):
         dists = [
-            math.hypot(add(i, neg(pt))) for i in self.verts
+            math.hypot(*add(i, neg(pt))) for i in self.verts
         ]
         return min(dists)
 
