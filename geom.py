@@ -49,10 +49,7 @@ def rotMat(a, b, c):
     ], 3, 3)
 
 def centroid(pts):
-    print(pts)
     total = ZeroVec
     for i in pts:
         total = add(total, i)
-    a = sc(total, 1/len(pts))
-    print(a)
-    return a
+    return sc(total, 1/len(pts))

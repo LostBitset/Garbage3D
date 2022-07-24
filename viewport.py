@@ -21,23 +21,26 @@ class Viewport(object):
         self.pxSize = pxSize
     
     def render(self, app, canvas):
-        tris = []
-        for i, (geom, render) in enumerate((self.geomsrc)(app)):
+        tasks = []
+        for geom, render in (self.geomsrc)(app):
             memo, visible = {}, set()
-            for j in range(len(geom.verts)):
-                memo[i][j] = self.cam.persp(geom.verts[j])
-                if memo[i][j][-1] == 0.0: continue
-                memo[i][j] = pDiv(memo[i][j])
-                if self.cam.isVisible(geom.verts[j]):
-                    visible.add(j)
+            for i in range(len(geom.verts)):
+                memo[i] = self.cam.persp(geom.verts[i])
+                if memo[i][-1] == 0.0: continue
+                memo[i] = pDiv(memo[i])
+                if self.cam.isVisible(geom.verts[i]):
+                    visible.add(i)
             for idx, tri in enumerate(geom.tris):
                 if allIn(tri, visible):
-                    tris.append(tri)
-        tris.sort(
-            key = lambda tri: \
-                math.hypot(*add(centroid(tri), neg(self.cam.ctr)))
+                    tasks.append((
+                        centroid([ geom.verts[i] for i in tri ]),
+                        render, (self, canvas, [
+                            memo[i] for i in tri
+                        ], idx, geom.data),
+                    ))
+        tasks.sort(
+            key = lambda x: \
+                -math.hypot(*add(x[0], neg(self.cam.ctr)))
         )
-        for tri in tris:
-            render(self, canvas, [
-                memo[i][j] for j in tri
-            ], idx, geom.data)
+        for _, render, args in tasks:
+            render(*args)
