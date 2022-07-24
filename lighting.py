@@ -58,4 +58,4 @@ def lambertian(viewport, tri, intensity, ambient = 0.1):
     normal = triNormal(tri)
     toCamera = add(viewport.cam.ctr, neg(centroid(tri)))
     toCamera = norm(toCamera)
-    return max(intensity * abs(dot(normal, toCamera)), ambient)
+    return (intensity * abs(dot(normal, toCamera))) + ambient
