@@ -32,4 +32,4 @@ class Viewport(object):
                 if allIn(tri, visible):
                     render(self, canvas, [
                         memo[i] for i in tri
-                    ], geom.data[idx] if geom.data != None else None)
+                    ], idx, geom.data)

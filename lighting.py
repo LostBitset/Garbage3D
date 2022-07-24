@@ -1,6 +1,6 @@
 # Kaidun (by HktOverload)
 
-import abc, math
+import abc, math, functools
 
 from geom import *
 
@@ -19,8 +19,34 @@ class PointLight(Light):
         self.brightness = brightness
     
     def intensity(self, target):
-        dist = math.hypot(add(target, neg(self.ctr)))
+        dist = math.hypot(*add(target, neg(self.ctr)))
         return self.brightness * (1 / (dist ** 2)) # inv-square law
 
-def lambertian(geom):
-    return geom.withData()
+def _diffuseShadingWrapper(lighting, geom=None, algorithm=None):
+    intensities = [ 0.0 ] * len(geom.tris)
+    for light in lighting:
+        for i in range(len(geom.tris)):
+            intensities[i] += \
+                light.intensity([
+                    geom.verts[j][0] for j in geom.tris[i]
+                ]) # TODO use centroid
+    for i in range(len(intensities)):
+        intensities[i] = algorithm(geom.tris[i], intensities[i])
+    return intensities
+
+def diffuseShadingAlgorithm(f):
+    def inner(geom):
+        return Geom(
+            geom.verts, geom.tris,
+            {
+                **geom.data,
+                'diffuse': functools.partial(
+                    _diffuseShadingWrapper, geom=geom, algorithm=f,
+                )
+            },
+        )
+    return inner
+
+@diffuseShadingAlgorithm
+def lambertian(tri, intensity):
+    return intensity # TODO actual lambertian reflectance

@@ -24,13 +24,15 @@ __no_star_import__ = True
 # This is done with the @renders decorator
 def renders(renderer, **kwargs):
     def inner(geom, chain):
-        def sub(viewport, canvas, tri, data, **kwargs2):
+        def sub(viewport, canvas, tri, idx, data, **kwargs2):
             kwargs.update(kwargs2)
             for f in chain:
-                tri, newKwargs = f(viewport, tri, data)
+                tri, newKwargs = f(viewport, tri, idx, data)
                 if newKwargs != None:
                     kwargs.update(newKwargs)
-            return renderer(viewport, canvas, tri, data, **kwargs)
+            return renderer(
+                viewport, canvas, tri, idx, data, **kwargs
+            )
         return geom, sub
     return inner
 
@@ -44,18 +46,24 @@ def toScreenSpace(viewport, tri):
         ]
 
 @renders
-def wireframe(viewport, canvas, tri, data, color='blue'):
-        if data != None:
-            color = data.get('wireframe-color', color)
-        canvas.create_polygon(
-            *toScreenSpace(viewport, tri),
-            fill='', outline=color,
-        )
+def wireframe(viewport, canvas, tri, idx, data, color='blue'):
+    if data != None and 'wireframe-color' in data:
+            newColor = data['wireframe-color'][idx]
+            if newColor != None:
+                color = newColor
+    canvas.create_polygon(
+        *toScreenSpace(viewport, tri),
+        fill='', outline=color,
+    )
+
+def clamp(x):
+    return min(1.0, max(0.0, x))
 
 @renders
-def flat(viewport, canvas, tri, data):
+def flat(viewport, canvas, tri, idx, data):
     assert data != None and 'diffuse' in data
-    color = 0x010101 * int(data['diffuse'](viewport.lighting) * 255)
+    intensity = data['diffuse'](viewport.lighting)[idx]
+    color = 0x010101 * int(clamp(intensity) * 255)
     canvas.create_polygon(
         *toScreenSpace(viewport, tri),
         fill=f'#{color:06x}', width=0,
