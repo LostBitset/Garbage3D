@@ -9,11 +9,14 @@ def allIn(itr, container):
             return False
     return True
 
+defaultSize = (1920//2, 1080//2)
+
 class Viewport(object):
-    __slots__ = 'cam', 'geomsrc', 'pxSize'
-    def __init__(self, cam, geomsrc, pxSize=(1920//2, 1080//2)):
+    __slots__ = 'cam', 'geomsrc', 'lighting', 'pxSize'
+    def __init__(self, cam, geomsrc, lighting=[], pxSize=defaultSize):
         self.cam = cam
         self.geomsrc = geomsrc
+        self.lighting = lighting
         self.pxSize = pxSize
     
     def render(self, app, canvas):
