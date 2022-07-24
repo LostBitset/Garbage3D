@@ -3,6 +3,7 @@
 from geom import *
 
 def halfCube():
+    frontData = {'wireframe-color': 'red'}
     return Geom(
         [
             [0, 0, 0], [1, 0, 0], [0, 1, 0], # 0 1 2
@@ -13,6 +14,7 @@ def halfCube():
             (0, 4, 1), (0, 4, 2), # bottom
             (3, 7, 6), (3, 7, 5), # top
             (0, 5, 3), (0, 5, 1), # front
-        ]
+        ],
+        [None, None, None, None, frontData, frontData],
     )
 

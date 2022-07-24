@@ -32,7 +32,9 @@ def renders(renderer, **kwargs):
     return inner
 
 @renders
-def wireframe(viewport, canvas, tri, _, color='blue'):
+def wireframe(viewport, canvas, tri, data, color='blue'):
+        if data != None:
+            color = data.get('wireframe-color', color)
         sX, sY = viewport.pxSize[0]//2, viewport.pxSize[1]//2
         def f(coord): # Converts from world-space to screen space
             return (
