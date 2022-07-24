@@ -19,7 +19,7 @@ A game (more specifically, a 15-112 term project).
 
 ### Gameplay
 
-Your job is twofold. First, you collect samples and artifacts.
+Your job is to collect samples.
 This is done by exploring the surface of abandoned planets, and searching for artifacts.
 Sample sites are automatically chosen, but you can select the difficulty ahead of time (how far away they are from your ship).
 You cannot switch sample difficulty levels while exploring on the surface.
