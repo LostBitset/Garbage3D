@@ -4,6 +4,9 @@ import abc, math
 
 from geom import *
 
+# The top-level functions should not be imported using star
+__all__ = 'Light PointLight'.split()
+
 class Light(abc.ABC):
 
     @abc.abstractmethod
@@ -18,3 +21,6 @@ class PointLight(Light):
     def intensity(self, target):
         dist = math.hypot(add(target, neg(self.ctr)))
         return self.brightness * (1 / (dist ** 2)) # inv-square law
+
+def lambertian(geom):
+    return geom.withData()

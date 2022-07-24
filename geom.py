@@ -21,6 +21,15 @@ class Geom(object):
         self.tris = tris # Tuple3[IndexInto[self.verts]]
         self.data = data # List[Dict[Str,Any]]
         self.aabb = makeAABB(self.verts) # Tuple2[Coord3]
+    
+    def withData(self, newData):
+        return Geom(
+            self.verts, self.tris,
+            data=[
+                {**self.data[i], **newData[i]} \
+                    for i in range(len(self.data))
+            ]
+        )
 
 class Plane(object):
     __slots__ = 'pt', 'normal'

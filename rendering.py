@@ -6,6 +6,8 @@ from geom import *
 # This defines rendering-specific top-level functions
 # Instead, use the following:
 # import rendering as r
+__all__ = '__no_star_import__',
+__no_star_import__ = True
 
 # A renderer is simply a function of the type
 # (Viewport, Canvas, List3[Coord2], Dict[Str,Any]) -> NoneType
@@ -53,7 +55,7 @@ def wireframe(viewport, canvas, tri, data, color='blue'):
 @renders
 def flat(viewport, canvas, tri, data):
     assert data != None and 'diffuse' in data
-    color = 0x010101 * int(data['diffuse'] * 255)
+    color = 0x010101 * int(data['diffuse'](viewport.lighting) * 255)
     canvas.create_polygon(
         *toScreenSpace(viewport, tri),
         fill=f'#{color:06x}', width=0,

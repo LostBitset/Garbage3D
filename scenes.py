@@ -5,6 +5,7 @@ import abc
 from scene_components import *
 
 import rendering as r
+import lighting as l
 
 class Scene(abc.ABC):
 
@@ -30,4 +31,4 @@ class CubeScene(Scene):
 
     @staticmethod
     def allGeometry(app):
-        return [ r.wireframe(halfCube(), []) ]
+        return [ r.wireframe(l.lambertian(halfCube()), []) ]
