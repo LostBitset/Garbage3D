@@ -13,7 +13,7 @@ def appStarted(app):
     app.viewer = Viewport(
         Camera(app.camCtr, roll=app.camRoll),
         lambda app: app.scene.allGeometry(app),
-        lighting=[ PointLight([0, 0, 3], 1.5), ],
+        lighting=[ PointLight(app.camCtr, 3.5), ],
     )
     # The size changed from undefined to something, didn't it?
     sizeChanged(app)
@@ -45,6 +45,7 @@ def keyPressed(app, event):
 def redrawAll(app, canvas):
     canvas.create_rectangle(0, 0, app.w, app.h, fill='#000')
     app.viewer.cam = Camera(app.camCtr, roll=app.camRoll)
+    app.viewer.lighting[0].ctr = app.camCtr
     app.viewer.render(app, canvas)
 
 if __name__ == '__main__':
