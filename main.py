@@ -2,6 +2,7 @@
 
 from cmu_112_graphics import *
 
+from lighting import *
 from scenes import *
 from viewport import *
 
@@ -12,6 +13,7 @@ def appStarted(app):
     app.viewer = Viewport(
         Camera(app.camCtr, roll=app.camRoll),
         lambda app: app.scene.allGeometry(app),
+        lighting=[ PointLight([0, 0, 0], 0.5), ],
     )
     # The size changed from undefined to something, didn't it?
     sizeChanged(app)
