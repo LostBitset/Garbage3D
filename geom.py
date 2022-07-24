@@ -3,7 +3,6 @@
 from linalg import *
 
 from math import sin, cos
-import math
 
 def components(vecs, n):
     for i in range(n):
@@ -53,3 +52,12 @@ def centroid(pts):
     for i in pts:
         total = add(total, i)
     return sc(total, 1/len(pts))
+
+# Get the normal vector of a surface defined as a triangle
+# This could be either positive or negative, depending on the ordering
+# of the points
+def triNormal(tri):
+    [a, b, c] = tri
+    b = add(b, neg(a))
+    c = add(c, neg(a))
+    return norm(cross3(b, c))

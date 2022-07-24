@@ -4,6 +4,8 @@
 # to act as the zero vector (of any length)
 # Useful as an initial value when looping (i.e. in mat-vec-mul)
 
+import math
+
 class _ZeroVecT(object):
     def __new__(cls):
         return ZeroVec
@@ -36,6 +38,10 @@ def dot(a, b):
 # Negate a vector
 def neg(a):
     return [ -i for i in a ]
+
+# Normalize a vector
+def norm(a):
+    return sc(a, 1/math.hypot(*a))
 
 # A matrix with elements stored in column-major order
 class Mat(object):
@@ -112,3 +118,12 @@ def toH(v):
 # Convert from homogenous coordinates (the perspective divide)
 def pDiv(v):
     return [ i/v[-1] for i in v[:-1] ]
+
+# Calculate the cross product in the 3-dimensional case
+def cross3(a, b):
+    m = Mat([
+        0, a[2], -a[1],
+        -a[2], 0, a[0],
+        a[1], -a[0], 0
+    ], 3, 3)
+    return m * b

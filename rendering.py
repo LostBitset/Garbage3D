@@ -62,7 +62,7 @@ def clamp(x):
 @renders
 def flat(viewport, canvas, tri, idx, data):
     assert data != None and 'diffuse' in data
-    intensity = data['diffuse'](viewport.lighting)[idx]
+    intensity = data['diffuse'](viewport)[idx]
     color = 0x010101 * int(clamp(intensity) * 255)
     canvas.create_polygon(
         *toScreenSpace(viewport, tri),
