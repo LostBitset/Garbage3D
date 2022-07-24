@@ -24,12 +24,6 @@ class Geom(object):
         self.data = data # Dict[Str,List[Any]]
         self.aabb = makeAABB(self.verts) # Tuple2[Coord3]
 
-    def centroidDist(self, pt):
-        dists = [
-            math.hypot(*add(i, neg(pt))) for i in self.verts
-        ]
-        return min(dists)
-
 class Plane(object):
     __slots__ = 'pt', 'normal'
     def __init__(self, pt, normal):
