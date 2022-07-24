@@ -21,6 +21,8 @@ class Viewport(object):
             memo, visible = {}, set()
             for i in range(len(geom.verts)):
                 memo[i] = self.cam.persp(geom.verts[i])
+                if memo[i][-1] == 0.0: continue
+                memo[i] = pDiv(memo[i])
                 if self.cam.isVisible(geom.verts[i]):
                     visible.add(i)
             for tri in geom.tris:

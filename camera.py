@@ -32,7 +32,7 @@ class Camera(object):
     def persp(self, v):
         v = add(v, neg(self.ctr))
         homogenous2D = self.rotP * toH(v)
-        return pDiv(homogenous2D)
+        return homogenous2D
 
     # Check if a vertex is visible
     def isVisible(self, v):
