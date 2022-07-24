@@ -13,6 +13,10 @@ class Light(abc.ABC):
     def intensity(self, target):
         pass
 
+    @abc.abstractmethod
+    def center(self):
+        pass
+
 class PointLight(Light):
     def __init__(self, ctr, brightness):
         self.ctr = ctr
@@ -21,22 +25,21 @@ class PointLight(Light):
     def intensity(self, target):
         dist = math.hypot(*add(target, neg(self.ctr)))
         return self.brightness * (1 / (dist ** 2)) # inv-square law
+    
+    def center(self):
+        return self.ctr
 
 def _diffuseShadingWrapper(viewport, geom=None, f=None, kwargs={}):
     intensities = [ 0.0 ] * len(geom.tris)
     for light in viewport.lighting:
         for i in range(len(geom.tris)):
+            tri = [ geom.verts[j] for j in geom.tris[i] ]
             intensities[i] += \
-                light.intensity(centroid([
-                    geom.verts[j] for j in geom.tris[i]
-                ]))
-    for i in range(len(intensities)):
-        intensities[i] = f(
-            viewport,
-            [ geom.verts[j] for j in geom.tris[i] ],
-            intensities[i],
-            **kwargs,
-        )
+                f(
+                    light, tri,
+                    light.intensity(centroid(tri)),
+                    **kwargs,
+                )
     return intensities
 
 def diffuseShadingAlgorithm(f):
@@ -54,8 +57,8 @@ def diffuseShadingAlgorithm(f):
     return inner
 
 @diffuseShadingAlgorithm
-def lambertian(viewport, tri, intensity, ambient = 0.1):
+def lambertian(light, tri, intensity, ambient = 0.1):
     normal = triNormal(tri)
-    toCamera = add(viewport.cam.ctr, neg(centroid(tri)))
+    toCamera = add(light.center(), neg(centroid(tri)))
     toCamera = norm(toCamera)
     return (intensity * abs(dot(normal, toCamera))) + ambient

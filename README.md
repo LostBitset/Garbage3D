@@ -14,7 +14,6 @@ A game (more specifically, a 15-112 term project).
 - Uses only `cmu_112_graphics` (tkinter based)
 - Procedural terrain
 - Full 3D
-- Dynamic subdivision to counteract the stupidity of flat shading
 - Distance fog and a day-night cycle
 - Flybacks are implemented using a motion planner to avoid terrain obstructions
 
