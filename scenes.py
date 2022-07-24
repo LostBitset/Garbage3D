@@ -31,4 +31,4 @@ class CubeScene(Scene):
 
     @staticmethod
     def allGeometry(app):
-        return [ r.wireframe(l.lambertian(halfCube()), []) ]
+        return [ r.wireframe(halfCube(), []) ]

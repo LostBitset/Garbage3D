@@ -48,9 +48,9 @@ def toScreenSpace(viewport, tri):
 @renders
 def wireframe(viewport, canvas, tri, idx, data, color='blue'):
     if data != None and 'wireframe-color' in data:
-            newColor = data['wireframe-color'][idx]
-            if newColor != None:
-                color = newColor
+        newColor = data['wireframe-color'][idx]
+        if newColor != None:
+            color = newColor
     canvas.create_polygon(
         *toScreenSpace(viewport, tri),
         fill='', outline=color,
