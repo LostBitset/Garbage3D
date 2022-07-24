@@ -25,8 +25,8 @@ class Viewport(object):
                 memo[i] = pDiv(memo[i])
                 if self.cam.isVisible(geom.verts[i]):
                     visible.add(i)
-            for tri in geom.tris:
+            for idx, tri in enumerate(geom.tris):
                 if allIn(tri, visible):
                     render(self, canvas, [
                         memo[i] for i in tri
-                    ])
+                    ], geom.data[idx] if geom.data != None else None)

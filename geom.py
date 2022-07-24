@@ -15,10 +15,11 @@ def makeAABB(verts):
     )
 
 class Geom(object):
-    __slots__ = 'verts', 'tris', 'aabb'
-    def __init__(self, verts, tris):
+    __slots__ = 'verts', 'tris', 'data', 'aabb'
+    def __init__(self, verts, tris, data=None):
         self.verts = verts # List[Coord3]
         self.tris = tris # Tuple3[IndexInto[self.verts]]
+        self.data = data # List[Dict[Str,Any]]
         self.aabb = makeAABB(self.verts) # Tuple2[Coord3]
 
 class Plane(object):

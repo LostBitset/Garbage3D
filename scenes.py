@@ -30,4 +30,4 @@ class CubeScene(Scene):
 
     @staticmethod
     def allGeometry(app):
-        return [ r.wireframe(halfCube()) ]
+        return [ r.wireframe(halfCube(), []) ]
