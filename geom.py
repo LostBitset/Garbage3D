@@ -1,7 +1,9 @@
 # Kaidun (by HktOverload)
 
 from linalg import *
+
 from math import sin, cos
+import math
 
 def components(vecs, n):
     for i in range(n):
@@ -21,6 +23,12 @@ class Geom(object):
         self.tris = tris # Tuple3[IndexInto[self.verts]]
         self.data = data # Dict[Str,List[Any]]
         self.aabb = makeAABB(self.verts) # Tuple2[Coord3]
+
+    def minDistTo(self, pt):
+        dists = [
+            math.hypot(add(i, neg(pt))) for i in self.verts
+        ]
+        return min(dists)
 
 class Plane(object):
     __slots__ = 'pt', 'normal'
@@ -45,3 +53,12 @@ def rotMat(a, b, c):
         (sin(a)*sin(b)*cos(c))-(cos(a)*sin(c)),
         cos(b)*cos(c),
     ], 3, 3)
+
+def centroid(pts):
+    print(pts)
+    total = ZeroVec
+    for i in pts:
+        total = add(total, i)
+    a = sc(total, 1/len(pts))
+    print(a)
+    return a

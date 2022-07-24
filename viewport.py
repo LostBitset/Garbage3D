@@ -1,6 +1,7 @@
 # Kaidun (by HktOverload)
 
 from camera import *
+from geom import *
 
 # Check if all items of an iterable are in a container
 def allIn(itr, container):
@@ -20,7 +21,11 @@ class Viewport(object):
         self.pxSize = pxSize
     
     def render(self, app, canvas):
-        for geom, render in (self.geomsrc)(app):
+        geometries = (self.geomsrc)(app)
+        geometries.sort(
+            key = lambda x: -x[0].minDistTo(self.cam.ctr)
+        )
+        for geom, render in geometries:
             memo, visible = {}, set()
             for i in range(len(geom.verts)):
                 memo[i] = self.cam.persp(geom.verts[i])

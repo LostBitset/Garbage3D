@@ -27,9 +27,9 @@ def _diffuseShadingWrapper(lighting, geom=None, algorithm=None):
     for light in lighting:
         for i in range(len(geom.tris)):
             intensities[i] += \
-                light.intensity([
-                    geom.verts[j][0] for j in geom.tris[i]
-                ]) # TODO use centroid
+                light.intensity(centroid([
+                    geom.verts[j] for j in geom.tris[i]
+                ]))
     for i in range(len(intensities)):
         intensities[i] = algorithm(geom.tris[i], intensities[i])
     return intensities

@@ -13,7 +13,7 @@ def appStarted(app):
     app.viewer = Viewport(
         Camera(app.camCtr, roll=app.camRoll),
         lambda app: app.scene.allGeometry(app),
-        lighting=[ PointLight([0, 0, 0], 0.5), ],
+        lighting=[ PointLight([0, 0, 3], 1.5), ],
     )
     # The size changed from undefined to something, didn't it?
     sizeChanged(app)
