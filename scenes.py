@@ -33,6 +33,7 @@ class CubeScene(Scene):
     def onEvent(app, event):
         moveCamera(app, event)
         adjustLight(app, event)
+        app.viewer.lighting[0].ctr = app.viewer.cam.ctr
 
     @staticmethod
     def allGeometry(app):
