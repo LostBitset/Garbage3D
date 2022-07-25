@@ -32,6 +32,7 @@ class CubeScene(Scene):
     @staticmethod
     def onEvent(app, event):
         moveCamera(app, event)
+        adjustLight(app, event)
 
     @staticmethod
     def allGeometry(app):
