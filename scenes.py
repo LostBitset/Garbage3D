@@ -2,6 +2,7 @@
 
 import abc
 
+from scene_geometry import *
 from scene_components import *
 
 import rendering as r
@@ -11,8 +12,11 @@ class Scene(abc.ABC):
 
     @staticmethod
     @abc.abstractmethod
-    def onEvent(app, event, eventType):
+    def onEvent(app, event):
         # Called when an event occurs
+        # These don't use the same format as tkinter
+        # For example, pressing 'r' is encoded as ('kb/down', 'r')
+        # Moving the mouse to (0, 0) is encoded as ('mouse/to', 0, 0)
         pass
 
     @staticmethod
@@ -26,8 +30,8 @@ class Scene(abc.ABC):
 class CubeScene(Scene):
 
     @staticmethod
-    def onEvent(app, event, eventType):
-        raise NotImplementedError('Event system does not yet exist')
+    def onEvent(app, event):
+        moveCamera(app, event)
 
     @staticmethod
     def allGeometry(app):

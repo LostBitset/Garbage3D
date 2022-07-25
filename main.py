@@ -7,13 +7,11 @@ from scenes import *
 from viewport import *
 
 def appStarted(app):
-    app.camCtr = [2, 2, 2]
-    app.camRoll = (pi/2)
     app.scene = CubeScene
     app.viewer = Viewport(
-        Camera(app.camCtr, roll=app.camRoll),
+        Camera([2, 2, 2], roll=(pi/2)),
         lambda app: app.scene.allGeometry(app),
-        lighting=[ PointLight(app.camCtr, 3.5), ],
+        lighting=[ PointLight([1, 2, 2], 3.5), ],
     )
     # The size changed from undefined to something, didn't it?
     sizeChanged(app)
@@ -24,28 +22,16 @@ def sizeChanged(app):
     app.cx, app.cy = app.w//2, app.h//2
 
 def keyPressed(app, event):
-    step, angleStep = 0.2, (pi/16)
-    if event.key == 'a':
-        app.camCtr[0] -= step
-    elif event.key == 'd':
-        app.camCtr[0] += step
-    elif event.key == 'w':
-        app.camCtr[1] -= step
-    elif event.key == 's':
-        app.camCtr[1] += step
-    elif event.key == 'e':
-        app.camCtr[2] -= step
-    elif event.key == 'c':
-        app.camCtr[2] += step
-    elif event.key == 'q':
-        app.camRoll -= angleStep
-    elif event.key == 'f':
-        app.camRoll += angleStep
+    app.scene.onEvent(app, ('kb/down', event.key))
+
+def mousePressed(app, event):
+    app.scene.onEvent(app, ('mouse/click', event.x, event.y))
+
+def mouseMoved(app, event):
+    app.scene.onEvent(app, ('mouse/to', event.x, event.y))
 
 def redrawAll(app, canvas):
     canvas.create_rectangle(0, 0, app.w, app.h, fill='#000')
-    app.viewer.cam = Camera(app.camCtr, roll=app.camRoll)
-    app.viewer.lighting[0].ctr = app.camCtr
     app.viewer.render(app, canvas)
 
 if __name__ == '__main__':
