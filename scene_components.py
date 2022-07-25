@@ -9,3 +9,9 @@ def moveCamera(app, event):
         app.viewer.cam.ctr[0] -= 0.1
     elif event == ('kb/down', 'd'):
         app.viewer.cam.ctr[0] += 0.1
+
+def adjustLight(app, event):
+    if event == ('kb/down', '<'):
+        app.viewer.lighting[0].brightness -= 0.3
+    elif event == ('kb/down', '>'):
+        app.viewer.lighting[0].brightness += 0.3
