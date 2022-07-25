@@ -13,6 +13,7 @@ def appStarted(app):
         lambda app: app.scene.allGeometry(app),
         lighting=[ PointLight([1, 2, 2], 3.5), ],
     )
+    app.timerDelay = 1000//30 # 30 fps
     # The size changed from undefined to something, didn't it?
     sizeChanged(app)
 
@@ -29,6 +30,9 @@ def mousePressed(app, event):
 
 def mouseMoved(app, event):
     app.scene.onEvent(app, ('mouse/to', event.x, event.y))
+
+def timerFired(app):
+    app.scene.onEvent(app, ('timer/fired',))
 
 def redrawAll(app, canvas):
     canvas.create_rectangle(0, 0, app.w, app.h, fill='#000')
