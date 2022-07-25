@@ -5,6 +5,10 @@ def moveCamera(app, event):
         app.viewer.cam.rotate(roll=-0.1)
     elif event == ('kb/p', 'Down'):
         app.viewer.cam.rotate(roll=+0.1)
+    elif event == ('kb/p', 'Left'):
+        app.viewer.cam.rotate(pitch=+0.1)
+    elif event == ('kb/p', 'Right'):
+        app.viewer.cam.rotate(pitch=-0.1)
     elif event == ('kb/p', 'a'):
         app.viewer.cam.ctr[0] -= 0.1
     elif event == ('kb/p', 'd'):
