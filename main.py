@@ -22,10 +22,10 @@ def sizeChanged(app):
     app.cx, app.cy = app.w//2, app.h//2
 
 def keyPressed(app, event):
-    app.scene.onEvent(app, ('kb/down', event.key))
+    app.scene.onEvent(app, ('kb/p', event.key))
 
 def mousePressed(app, event):
-    app.scene.onEvent(app, ('mouse/click', event.x, event.y))
+    app.scene.onEvent(app, ('mouse/p', event.x, event.y))
 
 def mouseMoved(app, event):
     app.scene.onEvent(app, ('mouse/to', event.x, event.y))
