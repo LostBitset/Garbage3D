@@ -19,16 +19,21 @@ class Camera(object):
         self.setup(**kwargs)
         
     def setup(self, yaw=0, pitch=0, roll=(pi/2)):
-        self.rot = (yaw, pitch, roll)
-        mat = rotMat(yaw, pitch, roll)
+        self.rot = rotMat(yaw, pitch, roll)
+        self.setupRot()
+
+    def setupRot(self):
         rotH = Mat([
-            *mat.col(0), 0,
-            *mat.col(1), 0,
-            *mat.col(2), 0,
+            *self.rot.col(0), 0,
+            *self.rot.col(1), 0,
+            *self.rot.col(2), 0,
             0, 0, 0, 1,
         ], 4, 4)
         self.rotP = perspective(self.flen) @ rotH
-        normal = mat.t() * [0, 0, 1]
+        self.setupImPlane()
+
+    def setupImPlane(self):
+        normal = self.rot.t() * [0, 0, 1]
         pt = self.ctr
         self.imPlane = Plane(pt, normal)
 
@@ -44,8 +49,16 @@ class Camera(object):
 
     # Rotate the camera
     def rotate(self, yaw=0, pitch=0, roll=0):
-        self.setup(
-            yaw=self.rot[0]+yaw,
-            pitch=self.rot[1]+pitch,
-            roll=self.rot[2]+roll,
+        self.rot @= rotMat(yaw, pitch, roll)
+        self.setupRot()
+
+    # Move the camera along a given axis in it's own coordinate space
+    def move(self, ax, mod):
+        self.translate(
+            [ mod if i == ax else 0 for i in range(3) ]
         )
+
+    # Translate the camera with respect to where it is facing
+    def translate(self, v):
+        self.ctr = add(self.ctr, self.rot * v)
+        self.setupImPlane()
