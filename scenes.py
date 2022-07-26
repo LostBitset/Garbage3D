@@ -37,4 +37,4 @@ class CubeScene(Scene):
 
     @staticmethod
     def allGeometry(app):
-        return [ r.flat(l.lambertian(halfCube()), []) ]
+        return [ r.flat(l.lambertian(halfCube())) ]

@@ -23,7 +23,7 @@ __no_star_import__ = True
 # and return (tri, newKwargs) pairs
 # This is done with the @renders decorator
 def renders(renderer, **kwargs):
-    def inner(geom, chain):
+    def inner(geom, chain=[]):
         def sub(viewport, canvas, tri, idx, data, **kwargs2):
             kwargs.update(kwargs2)
             for f in chain:
