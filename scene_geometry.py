@@ -16,5 +16,10 @@ def halfCube():
         ],
         {
             'wireframe-color': [None, None, None, None, 'red', 'red'],
+            'color': [
+                0xFF0000, 0xFF0000,
+                0x00FF00, 0x00FF00,
+                0x0000FF, 0x0000FF,
+            ],
         },
     )

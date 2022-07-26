@@ -63,9 +63,11 @@ def clamp(x):
 def flat(viewport, canvas, tri, idx, data):
     assert data != None and 'diffuse' in data
     intensity = data['diffuse'](viewport)[idx]
-    colorAdj = 0x010101 * int(clamp(1-intensity) * 255)
-    color = data.get(color, 0xFFFFFF) - colorAdj
+    adj = int(clamp(1-intensity) * 255)
+    color = data['color'][idx] if 'color' in data else 0xFFFFFF
+    r, g, b = (color >> 16) & 0xFF, (color >> 8) & 0xFF, color & 0xFF
+    r, g, b = max(0, r - adj), max(0, g - adj), max(0, b - adj)
     canvas.create_polygon(
         *toScreenSpace(viewport, tri),
-        fill=f'#{color:06x}', width=0,
+        fill=f'#{r:02x}{g:02x}{b:02x}', width=0,
     )
