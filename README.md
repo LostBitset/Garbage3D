@@ -21,6 +21,7 @@ A game (more specifically, a 15-112 term project).
 	- [ ] Exponential scattering effect
 	- [ ] Depth sampling and interpolation
 	- [ ] Realistic sample updates
+	- [ ] Dynamically control render distance
 - [ ] Procedural generation
 	- [ ] Generating terrain
 	- [ ] Defining where weak sites are
