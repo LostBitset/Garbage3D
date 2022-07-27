@@ -15,7 +15,7 @@ A game (more specifically, a 15-112 term project).
 	- [X] Perspective camera implemented with homogenous coordinates
 	- [X] Painter's algorithm to display geometry
 	- [X] Flat shading with Lambertian reflectance
-	- [ ] Clipping
+	- [ ] Chunk loading
 	- [ ] Bump mapping
 	- [ ] Non-synchronous surface updates and caching
 - [ ] Dynamic fog
