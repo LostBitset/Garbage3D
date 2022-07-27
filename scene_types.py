@@ -1,5 +1,9 @@
 # Kaidun (by HktOverload)
 
+import abc
+
+from chunks import *
+
 class Scene(abc.ABC):
 
     @classmethod
@@ -33,7 +37,7 @@ class ChunkScene(Scene, abc.ABC):
 
 	@classmethod
 	@abc.abstractmethod
-	def getLoadedChunks(cls, app):
+	def chunks(cls, app):
 		# This should return a list of chunks that are to be loaded
 		pass
 
@@ -51,6 +55,8 @@ class ChunkScene(Scene, abc.ABC):
 		geometry = []
 		geometry.extend(cls.persistentGeometry(app))
 		geometry.extend([
-			chunk.load() for i in cls.getLoadedChunks(app)
+			chunk.load() \
+				for chunk in cls.getLoadedChunks(app)
+				if shouldLoad(chunk)
 		])
 		return geometry
