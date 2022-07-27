@@ -3,4 +3,4 @@
 from geom import *
 
 class Chunks(object):
-	__slots__ = 'dict', 'size'
+	__slots__ = 'indexed', 'size'
