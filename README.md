@@ -23,6 +23,9 @@ Your first mission is to visit the planet Sora-9, where you discover an intense 
 You discover that motion causes the fog to concentrate at your location, and staying still causes it to disperse.
 However, you suddenly find your vision immersed in a wireframe view of the surface.
 You can see huge mountains, but occasionally sides of the mountain will drop down, and then rise back up.
+
+### Gameplay
+
 These (reversible avalanches?) are triggered when moving on certain "weak sites".
 The probability that a site will be a weak site can be identified loosely based on the color of the surface rock.
 If you react quickly enough, you can use your emergency jetpack to superjump and recover.
