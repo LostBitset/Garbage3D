@@ -9,13 +9,26 @@ A game (more specifically, a 15-112 term project).
 > You land on a planet, explore it on foot, collect samples from appropriate areas, and try to make your way out.
 > If only it was that easy....
 
-### Goals for the project
+### Project Goals
 
-- Uses only `cmu_112_graphics` (tkinter based)
-- Procedural terrain
-- Full 3D
-- Distance fog and a day-night cycle
-- Flybacks are implemented using a motion planner to avoid terrain obstructions
+- [ ] Full 3D with only `cmu_112_graphics` (tkinter based)
+	- [ ] Perspective camera implemented with homogenous coordinates
+	- [ ] Painter's algorithm to display geometry
+	- [ ] Flat shading with Lambertian reflectance
+	- [ ] Bump mapping
+	- [ ] Non-synchronous surface updates and caching
+- [ ] Dynamic fog
+	- [ ] Exponential scattering effect
+	- [ ] Depth sampling and interpolation
+	- [ ] Realistic sample updates
+- [ ] Procedural generation
+	- [ ] Generating terrain
+	- [ ] Defining where weak sites are
+	- [ ] Deformation during RAs
+- [ ] Flybacks implemented using a motion planner
+	- [ ] Defining the configuration space
+	- [ ] Virtual potential fields
+	- [ ] A simple autodiff engine because I don't want to do math
 
 ### Intro Sequence
 
@@ -26,7 +39,7 @@ You can see huge mountains, but occasionally sides of the mountain will drop dow
 
 ### Gameplay
 
-These (reversible avalanches?) are triggered when moving on certain "weak sites".
+These reversible avalanches (RAs) are triggered when moving on certain "weak sites".
 The probability that a site will be a weak site can be identified loosely based on the color of the surface rock.
 If you react quickly enough, you can use your emergency jetpack to superjump and recover.
 However, this uses up your power reserves (based on how far up you have to go).
