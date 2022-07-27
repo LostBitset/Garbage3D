@@ -11,12 +11,12 @@ import lighting as l
 
 class CubeScene(Scene):
 
-    @staticmethod
-    def onEvent(app, event):
+    @classmethod
+    def onEvent(cls, app, event):
         moveCamera(app, event)
         adjustLight(app, event)
         app.viewer.lighting[0].ctr = app.viewer.cam.ctr
 
-    @staticmethod
-    def allGeometry(app):
+    @classmethod
+    def allGeometry(cls, app):
         return [ r.flat(l.lambertian(halfCube())) ]
