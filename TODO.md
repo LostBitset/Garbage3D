@@ -11,3 +11,9 @@ Week 4:
 - [ ] Clip tris (and don't even load chunks) that are far enough away
 - [ ] Scale the number of samples with the intended amount of fog
 - [ ] Update distance fog samples in a realistic way when the camera is moved
+
+Week 5:
+- [ ] Write the backend parts for handling sample collections
+- [ ] Allow save data to be stored on the disk
+- [ ] Create the interface for viewing and managing your sample collection
+- [ ] Create the interface for switching planets
