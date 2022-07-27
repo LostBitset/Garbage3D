@@ -12,9 +12,10 @@ A game (more specifically, a 15-112 term project).
 ### Project Goals
 
 - [ ] Full 3D with only `cmu_112_graphics` (tkinter based)
-	- [ ] Perspective camera implemented with homogenous coordinates
-	- [ ] Painter's algorithm to display geometry
-	- [ ] Flat shading with Lambertian reflectance
+	- [X] Perspective camera implemented with homogenous coordinates
+	- [X] Painter's algorithm to display geometry
+	- [X] Flat shading with Lambertian reflectance
+	- [ ] Clipping
 	- [ ] Bump mapping
 	- [ ] Non-synchronous surface updates and caching
 - [ ] Dynamic fog
@@ -28,7 +29,6 @@ A game (more specifically, a 15-112 term project).
 - [ ] Flybacks implemented using a motion planner
 	- [ ] Defining the configuration space
 	- [ ] Virtual potential fields
-	- [ ] A simple autodiff engine because I don't want to do math
 
 ### Intro Sequence
 
