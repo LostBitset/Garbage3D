@@ -12,9 +12,18 @@ class Scene(abc.ABC):
         pass
 
     @staticmethod
-    @abc.abstractmethod
     def allGeometry(app):
         # A list containing (Geom, Renderer) tuples for everything
         # within this scene
         # Basically just a geomsrc
-        pass
+        # This is not an abstract method because implementing it
+        # is optional, not every scene has 3D geometry
+        return []
+
+    @staticmethod
+    def drawOverlay(app, canvas):
+    	# A procedure to draw any non-3D elements that go on top
+    	# of the 3D part of the scene
+    	# This is not an abstractmethod because implementing it
+    	# is completely optional
+    	pass

@@ -37,6 +37,7 @@ def timerFired(app):
 def redrawAll(app, canvas):
     canvas.create_rectangle(0, 0, app.w, app.h, fill='#000')
     app.viewer.render(app, canvas)
+    app.scene.drawOverlay(app, canvas)
 
 if __name__ == '__main__':
     runApp(
