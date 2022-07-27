@@ -28,6 +28,7 @@ A game (more specifically, a 15-112 term project).
 	- [ ] Deformation during RAs
 - [ ] Flybacks implemented using a motion planner
 	- [ ] Defining the configuration space
+	- [ ] Reverse-mode autodiff for calculating gradients
 	- [ ] Virtual potential fields
 
 ### Intro Sequence
