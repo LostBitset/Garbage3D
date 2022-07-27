@@ -17,7 +17,6 @@ A game (more specifically, a 15-112 term project).
 	- [X] Flat shading with Lambertian reflectance
 	- [ ] Chunk loading
 	- [ ] Bump mapping
-	- [ ] Non-synchronous surface updates and caching
 - [ ] Dynamic fog
 	- [ ] Exponential scattering effect
 	- [ ] Depth sampling and interpolation
