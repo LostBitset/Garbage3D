@@ -17,7 +17,7 @@ def makeAABB(verts):
 
 class Geom(object):
     __slots__ = 'verts', 'tris', 'data', 'aabb'
-    def __init__(self, verts, tris, data=None):
+    def __init__(self, verts, tris, data={}):
         self.verts = verts # List[Coord3]
         self.tris = tris # Tuple3[IndexInto[self.verts]]
         self.data = data # Dict[Str,List[Any]]
