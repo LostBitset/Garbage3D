@@ -11,7 +11,7 @@ def getStdRenderer(dist):
 		return r.wireframe
 
 class Chunks(object):
-	__slots__ = 'indexed', 'xySize'
+	__slots__ = 'indexed', 'xySize', 'rendererFn'
 	def __init__(self, indexed, xySize, rendererFn=getStdRenderer):
 		self.indexed = indexed
 		self.xySize = xySize
@@ -44,5 +44,5 @@ class Chunks(object):
 		indexed = {}
 		for i in range(xCount):
 			for j in range(yCount):
-				indexed[(i, j)] = gen(i, j)
+				indexed[(i, j)] = gen((i, j))
 		return Chunks(indexed, xySize)

@@ -2,6 +2,7 @@
 
 from cmu_112_graphics import *
 
+from generation import *
 from lighting import *
 from scenes import *
 from viewport import *
@@ -13,6 +14,7 @@ def appStarted(app):
         lambda app: app.scene.allGeometry(app),
         lighting=[ PointLight([1, 2, 2], 3.5), ],
     )
+    app.chunks = halfCubeWorld(7, 7)
     app.timerDelay = 1000//30 # 30 fps
     # The size changed from undefined to something, didn't it?
     sizeChanged(app)

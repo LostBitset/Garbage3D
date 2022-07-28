@@ -48,4 +48,7 @@ class CubeScene(Scene):
 
     @classmethod
     def allGeometry(cls, app):
-        return [ r.flat(l.lambertian(halfCube())) ]
+        return app.chunks.loaded(
+            *app.viewer.cam.ctr[:2],
+            2
+        )
