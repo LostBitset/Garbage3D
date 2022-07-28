@@ -38,3 +38,11 @@ class Chunks(object):
 
 	def hasChunk(self, x, y):
 		return (x, y) in self.indexed
+
+	@classmethod
+	def generate(cls, gen, xySize, xCount, yCount):
+		indexed = {}
+		for i in range(xCount):
+			for j in range(yCount):
+				indexed[(i, j)] = gen(i, j)
+		return Chunks(indexed, xySize)
