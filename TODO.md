@@ -2,7 +2,7 @@
 
 Week 4:
 - [X] Finalize lighting and get it to work with colored surfaces
-- [ ] Implement chunk loading (chunks are just special `Geom` objects)
+- [X] Implement chunk loading (chunks are just special `Geom` objects)
 - [ ] Generate basic terrain that is either a mountain or valley
 - [ ] Create a player and make sure the player doesn't fall through the floor
 - [ ] Get distance fog to work with a predetermined amount of fog
