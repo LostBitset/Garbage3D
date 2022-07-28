@@ -23,6 +23,12 @@ class Geom(object):
         self.data = data # Dict[Str,List[Any]]
         self.aabb = makeAABB(self.verts) # Tuple2[Coord3]
 
+    def translated(self, vec):
+        return Geom(
+            [ add(vert, vec) for vert in self.verts ],
+            self.tris, self.data, self.aabb,
+        )
+
 class Plane(object):
     __slots__ = 'pt', 'normal'
     def __init__(self, pt, normal):

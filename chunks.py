@@ -11,10 +11,14 @@ def getStdRenderer(dist):
 		return r.wireframe
 
 class Chunks(object):
-	__slots__ = 'indexed', 'xySize', 'rendererFn'
-	def __init__(self, indexed, xySize, rendererFn=getStdRenderer):
+	__slots__ = 'indexed', 'xySize', 'transform', 'rendererFn'
+	def __init__(
+		self, indexed, xySize,
+		transform=None, rendererFn=getStdRenderer,
+	):
 		self.indexed = indexed
 		self.xySize = xySize
+		self.transform = transform
 		self.rendererFn = rendererFn
 
 	def loaded(self, x, y, chunkDist):
@@ -34,15 +38,19 @@ class Chunks(object):
 
 	def getChunk(self, x, y, dist):
 		geom = self.indexed[(x, y)]
+		deltaX, deltaY = self.xySize * x, self.xySize * y
+		geom = geom.translated((deltaX, deltaY, 0))
+		if self.transform != None:
+			geom = (self.transform)(geom)
 		return (self.rendererFn)(dist)(geom)
 
 	def hasChunk(self, x, y):
 		return (x, y) in self.indexed
 
 	@classmethod
-	def generate(cls, gen, xySize, xCount, yCount):
+	def generate(cls, gen, xySize, xCount, yCount, **kwargs):
 		indexed = {}
 		for i in range(xCount):
 			for j in range(yCount):
 				indexed[(i, j)] = gen((i, j))
-		return Chunks(indexed, xySize)
+		return Chunks(indexed, xySize, **kwargs)

@@ -7,6 +7,7 @@ from generation_geometry import *
 
 def halfCubeWorld(xCount, yCount):
 	return Chunks.generate(
-		lambda _: l.lambertian(halfCube()),
-		2.0, xCount, yCount
+		lambda _: halfCube(),
+		2.0, xCount, yCount,
+		transform=l.lambertian,
 	)
