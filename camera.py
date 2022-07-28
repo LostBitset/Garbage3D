@@ -49,7 +49,7 @@ class Camera(object):
 
     # Rotate the camera
     def rotate(self, yaw=0, pitch=0, roll=0):
-        self.rot @= rotMat(yaw, pitch, roll)
+        self.rot = rotMat(yaw, pitch, roll) @ self.rot
         self.setupRot()
 
     # Move the camera along a given axis in it's own coordinate space

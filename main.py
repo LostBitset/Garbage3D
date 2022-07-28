@@ -10,7 +10,7 @@ from viewport import *
 def appStarted(app):
     app.scene = CubeScene
     app.viewer = Viewport(
-        Camera([2, 2, 2], roll=(pi/2)),
+        Camera([2, 2, -2], pitch=(3*pi/4)),
         lambda app: app.scene.allGeometry(app),
         lighting=[ PointLight([1, 2, 2], 3.5), ],
     )

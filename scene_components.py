@@ -7,9 +7,9 @@ def moveCamera(app, event):
     elif event == ('kb/p', 'Down'):
         cam.rotate(roll=+0.1)
     elif event == ('kb/p', 'Left'):
-        cam.rotate(yaw=+0.1)
+        cam.rotate(pitch=+0.1)
     elif event == ('kb/p', 'Right'):
-        cam.rotate(yaw=-0.1)
+        cam.rotate(pitch=-0.1)
     elif event == ('kb/p', 's'):
         cam.move(2, +0.1)
     elif event == ('kb/p', 'w'):

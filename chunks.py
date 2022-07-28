@@ -28,8 +28,8 @@ class Chunks(object):
 				xIndex+i, yIndex+j,
 				self.hypotXY(i, j)
 			) \
-				for i in range(-chunkDist, +chunkDist+1)
-				for j in range(-chunkDist, +chunkDist+1)
+				for i in range(-chunkDist, +chunkDist+2)
+				for j in range(-chunkDist, +chunkDist+2)
 				if self.hasChunk(xIndex+i, yIndex+j)
 		]
 
