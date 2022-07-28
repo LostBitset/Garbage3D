@@ -39,7 +39,7 @@ class Chunks(object):
 	def getChunk(self, x, y, dist):
 		geom = self.indexed[(x, y)]
 		deltaX, deltaY = self.xySize * x, self.xySize * y
-		geom = geom.translated((deltaX, deltaY, 0))
+		geom = geom.translated([deltaX, deltaY, 0])
 		if self.transform != None:
 			geom = (self.transform)(geom)
 		return (self.rendererFn)(dist)(geom)

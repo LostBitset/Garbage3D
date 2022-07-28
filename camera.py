@@ -60,5 +60,5 @@ class Camera(object):
 
     # Translate the camera with respect to where it is facing
     def translate(self, v):
-        self.ctr = add(self.ctr, self.rot * v)
+        self.ctr = add(self.ctr, self.rot.t() * v)
         self.setupImPlane()

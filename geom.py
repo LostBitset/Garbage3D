@@ -26,7 +26,7 @@ class Geom(object):
     def translated(self, vec):
         return Geom(
             [ add(vert, vec) for vert in self.verts ],
-            self.tris, self.data, self.aabb,
+            self.tris, self.data,
         )
 
 class Plane(object):
