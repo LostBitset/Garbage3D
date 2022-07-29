@@ -2,6 +2,8 @@
 
 A game (more specifically, a 15-112 term project).
 
+**THIS FAILED BECAUSE OF SOME STUPID TKINTER ISSUE NOW ITS JUST A SHITTY 3D ENGINE BYE**
+
 > It's far in the future, and you live on a planet called Terr.
 > For a reason you can't clearly remember, you were placed into cryopreservation against your own will.
 > When you wake up, humanity has long abandoned this sector, and the majority of nearby planets have been destroyed.
