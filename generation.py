@@ -19,12 +19,14 @@ def triGrid(size, count):
 	]
 	tris = []
 	for idx, (i, j, _) in enumerate(verts):
-		if (i | j) == 0: continue
 		left = idx - 1
 		top = idx - count - 1
 		diag = top - 1
+		if diag < 0 or idx % (count + 1) == 0:
+			continue
 		tris.append((idx, left, diag))
 		tris.append((idx, top, diag))
+	print(tris)
 	return Geom(verts, tris)
 
 def triGridWorld(xCount, yCount, size, count):
