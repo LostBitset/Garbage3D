@@ -26,7 +26,6 @@ def triGrid(size, count):
 			continue
 		tris.append((idx, left, diag))
 		tris.append((idx, top, diag))
-	print(tris)
 	return Geom(verts, tris)
 
 def triGridWorld(xCount, yCount, size, count):
