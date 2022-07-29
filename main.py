@@ -14,7 +14,7 @@ def appStarted(app):
         lambda app: app.scene.allGeometry(app),
         lighting=[ PointLight([1, 2, 2], 3.5), ],
     )
-    app.chunks = triGridWorld(7, 7, 1, 2)
+    app.chunks = halfCubeWorld(7, 7)
     app.timerDelay = 1000//30 # 30 fps
     # The size changed from undefined to something, didn't it?
     sizeChanged(app)
