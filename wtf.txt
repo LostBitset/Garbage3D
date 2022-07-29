@@ -1,0 +1,29 @@
+Exception in Tkinter callback                    
+Traceback (most recent call last):               
+  File "/home/lpc/miniconda3/lib/python3.9/traceb
+ack.py", line 103, in print_exception            
+    for line in TracebackException(              
+  File "/home/lpc/miniconda3/lib/python3.9/traceb
+ack.py", line 517, in __init__                   
+    self.stack = StackSummary.extract(           
+  File "/home/lpc/miniconda3/lib/python3.9/traceb
+ack.py", line 366, in extract                    
+    f.line                                       
+  File "/home/lpc/miniconda3/lib/python3.9/traceb
+ack.py", line 288, in line                       
+    self._line = linecache.getline(self.filename,
+ self.lineno).strip()                            
+  File "/home/lpc/miniconda3/lib/python3.9/lineca
+che.py", line 30, in getline                     
+    lines = getlines(filename, module_globals)   
+  File "/home/lpc/miniconda3/lib/python3.9/lineca
+che.py", line 46, in getlines                    
+    return updatecache(filename, module_globals) 
+  File "/home/lpc/miniconda3/lib/python3.9/lineca
+che.py", line 136, in updatecache                
+    with tokenize.open(fullname) as fp:          
+  File "/home/lpc/miniconda3/lib/python3.9/tokeni
+ze.py", line 392, in open                        
+    buffer = _builtin_open(filename, 'rb')       
+Exception: maximum recursion depth exceeded while
+ calling a Python object                         
