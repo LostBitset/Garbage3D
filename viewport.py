@@ -1,4 +1,4 @@
-# Kaidun (by HktOverload)
+# (by HktOverload)
 
 from camera import *
 from geom import *
