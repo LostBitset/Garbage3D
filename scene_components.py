@@ -1,4 +1,4 @@
-# Kaidun (by HktOverload)
+# (by HktOverload)
 
 def moveCamera(app, event):
     cam = app.viewer.cam
