@@ -1,4 +1,4 @@
-# Kaidun (by HktOverload)
+# (by HktOverload)
 
 from cmu_112_graphics import *
 
