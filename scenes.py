@@ -1,4 +1,4 @@
-# Kaidun (by HktOverload)
+# (by HktOverload)
 
 import abc
 
