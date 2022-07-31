@@ -1,4 +1,4 @@
-# Kaidun (by HktOverload)
+# (by HktOverload)
 
 # ZeroVec is a singleton that can be used in the first position of add
 # to act as the zero vector (of any length)
