@@ -1,7 +1,8 @@
-# Kaidun
+# Garbage3D
 
-Originally, this was:
+A shitty 3d graphics engine made with tkinter 
 
-> A game (more specifically, a 15-112 term project).
-
-**THIS FAILED BECAUSE OF SOME STUPID TKINTER ISSUE NOW ITS JUST A SHITTY 3D ENGINE BYE**
+- This was supposed to be a 3d game made with tkinter
+- But then it turns out tkinter is way too slow
+- And it started crashing when there were too many triangles
+- So now it's just a shitty 3d graphics engine
