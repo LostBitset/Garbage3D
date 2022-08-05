@@ -7,6 +7,7 @@ from geom import *
 # The top-level functions should not be imported using star
 __all__ = 'Light PointLight'.split()
 
+# An abstract class representing a light
 class Light(abc.ABC):
 
     @abc.abstractmethod
@@ -17,6 +18,7 @@ class Light(abc.ABC):
     def center(self):
         pass
 
+# A uniform light source emitting light from a single point
 class PointLight(Light):
     def __init__(self, ctr, brightness):
         self.ctr = ctr
@@ -42,6 +44,12 @@ def _diffuseShadingWrapper(viewport, geom=None, f=None, kwargs={}):
                 )
     return intensities
 
+# A useful decorator to convert a function that returns
+# illumination values given (light, tri, intensity) into
+# a function that returns geometry with the appropriate
+# corresponding Geom.data['diffuse'] given the initial geometry
+# Note that this overwrites any existing Geom.data['diffuse']
+# but leaves everything else intact
 def diffuseShadingAlgorithm(f):
     def inner(geom, **kwargs):
         return Geom(
@@ -56,6 +64,10 @@ def diffuseShadingAlgorithm(f):
         )
     return inner
 
+# Lambertian reflectance!
+# [: Citation https://www.cs.jhu.edu/~ayuille/courses/Stat238-Winter12/lecture10.pdf :]
+# And this isn't actually a citation it's just interesting:
+# [: Citation/ActuallyJustCool https://en.wikipedia.org/wiki/Spectralon :]
 @diffuseShadingAlgorithm
 def lambertian(light, tri, intensity, ambient = 0.1):
     normal = triNormal(tri)

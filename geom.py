@@ -8,6 +8,7 @@ def components(vecs, n):
     for i in range(n):
         yield [ v[i] for v in vecs ]
 
+# AABB <-> Axis-Aligned Bounding Box
 def makeAABB(verts):
     xs, ys, zs = components(verts, 3)
     return (
@@ -41,7 +42,9 @@ class Plane(object):
             add(v, neg(self.pt)),
         )
 
-# A camera matrix (coordinate space relative to camera center)
+# A 3D rotation matrix
+# (a, b, c) <-> (yaw, pitch, roll)
+#               aka. Tait-Bryan angles
 def rotMat(a, b, c):
     return Mat([
         cos(a)*cos(b), sin(a)*cos(b), -sin(b),
@@ -53,6 +56,7 @@ def rotMat(a, b, c):
         cos(b)*cos(c),
     ], 3, 3)
 
+# Find the centroid of a triangle
 def centroid(pts):
     total = ZeroVec
     for i in pts:

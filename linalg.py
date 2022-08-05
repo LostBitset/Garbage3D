@@ -6,6 +6,12 @@
 
 import math
 
+# A singleton representing a zero vector
+# It doesn't have a specified dimension, and therefore
+# can be used with anything
+# In actuality, it's only useable as the first argument
+# to the add function, but this is really useful for building
+# up a vector by repeatedly adding n-dimensional vectors
 class _ZeroVecT(object):
     def __new__(cls):
         return ZeroVec
@@ -16,6 +22,8 @@ class _ZeroVecT(object):
     def __reduce__(self):
         return (_ZeroVecT, ())
 
+# It's a singleton! Only create a new instance if it doesn't
+# exist already
 if 'ZeroVec' not in globals():
     ZeroVec = object.__new__(_ZeroVecT)
 
@@ -100,6 +108,7 @@ class Mat(object):
         return res
     
     # mat-mat-mul
+    # In python this overloads the @ operator
     def __matmul__(self, other):
         assert isinstance(other, self.__class__)
         assert other.odim == self.idim
@@ -111,6 +120,9 @@ class Mat(object):
                 )
         return (self.__class__)(resList, other.idim, self.odim).t()
 
+# Homogenous coordinates are really cool
+# [: Citation https://staff.fnwi.uva.nl/r.vandenboomgaard/IPCV20172018/LectureNotes/MATH/homogenous.html :]
+
 # Convert into homogenous coordinates
 def toH(v):
     return [ *v, 1 ]
@@ -120,6 +132,7 @@ def pDiv(v):
     return [ i/v[-1] for i in v[:-1] ]
 
 # Calculate the cross product in the 3-dimensional case
+# [: Citation https://people.eecs.ku.edu/~jrmiller/Courses/VectorGeometry/VectorOperations.html :]
 def cross3(a, b):
     m = Mat([
         0, a[2], -a[1],

@@ -3,6 +3,9 @@
 from geom import *
 from math import pi
 
+# A 3x4 matrix encoding a perspective camera looking up
+# and located at the origin
+# [: Citation https://en.wikipedia.org/wiki/Camera_matrix :]
 def perspective(flen):
     return Mat([
         1, 0, 0,
@@ -11,17 +14,32 @@ def perspective(flen):
         0, 0, 0,
     ], 3, 4)
 
+# Represents a perspective camera
 class Camera(object):
+    # ctr <-> Camera center
+    # flen <-> Focal length
+    # rot <-> Rotation matrix that converts from world coords
+    #         to camera coords, where it's facing upwards
+    # rotP <-> The rotation matrix but combined with the
+    #          matrix defining a the perspective camera,
+    #          it converts from 3D homogenous coords (4D)
+    #          to 2D homogenous coords (3D), but doesn't
+    #          account for the displacement of the camera
+    # imPlane <-> A Plane object defining the image plane
     __slots__ = 'ctr', 'flen', 'rot', 'rotP', 'imPlane'
     def __init__(self, ctr, flen=1, **kwargs):
         self.ctr = ctr
         self.flen = flen
         self.setup(**kwargs)
-        
+    
+    # Define everything that takes optional arguments in
+    # __init__
     def setup(self, yaw=0, pitch=0, roll=(pi/2)):
         self.rot = rotMat(yaw, pitch, roll)
         self.setupRot()
 
+    # Setup everything to be in sync with self.rot
+    # This should be called whenever self.rot is modified
     def setupRot(self):
         rotH = Mat([
             *self.rot.col(0), 0,
@@ -32,6 +50,10 @@ class Camera(object):
         self.rotP = perspective(self.flen) @ rotH
         self.setupImPlane()
 
+    # Setup the image plane to be in sync with self.rot and
+    # also self.ctr
+    # Whenever self.rot is modified, call setupRot, but if only
+    # self.ctr is being changed, call this directly
     def setupImPlane(self):
         normal = self.rot.t() * [0, 0, 1]
         pt = self.ctr

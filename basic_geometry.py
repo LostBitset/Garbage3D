@@ -1,5 +1,10 @@
 # (by HktOverload)
 
+'''
+This file defines general (aka basic) geometry, and is therefore
+imported into both generation_geometry and scene_geometry
+'''
+
 from geom import *
 
 def halfCube():

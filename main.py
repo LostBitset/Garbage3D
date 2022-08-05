@@ -7,6 +7,10 @@ from lighting import *
 from scenes import *
 from viewport import *
 
+# Quick note to clarify some made-up terminology:
+# A geomsrc is a function that takes in app and returns
+# a list of (Geom, renderer) pairs
+
 def appStarted(app):
     app.scene = CubeScene
     app.viewer = Viewport(
@@ -24,6 +28,9 @@ def sizeChanged(app):
     app.w, app.h = app.width, app.height
     app.cx, app.cy = app.w//2, app.h//2
 
+# We want to to different things depending on the current scene
+# (when an event is triggered)
+
 def keyPressed(app, event):
     app.scene.onEvent(app, ('kb/p', event.key))
 
@@ -37,8 +44,11 @@ def timerFired(app):
     app.scene.onEvent(app, ('timer/fired',))
 
 def redrawAll(app, canvas):
+    # Clear the screen
     canvas.create_rectangle(0, 0, app.w, app.h, fill='#000')
+    # Render everything to the screen
     app.viewer.render(app, canvas)
+    # Draw any overlays
     app.scene.drawOverlay(app, canvas)
 
 if __name__ == '__main__':
