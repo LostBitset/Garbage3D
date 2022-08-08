@@ -45,6 +45,7 @@ class Plane(object):
 # A 3D rotation matrix
 # (a, b, c) <-> (yaw, pitch, roll)
 #               aka. Tait-Bryan angles
+# [: Citation https://en.wikipedia.org/wiki/Rotation_matrix#General_rotations :]
 def rotMat(a, b, c):
     return Mat([
         cos(a)*cos(b), sin(a)*cos(b), -sin(b),

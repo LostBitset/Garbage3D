@@ -122,6 +122,7 @@ class Mat(object):
 
 # Homogenous coordinates are really cool
 # [: Citation https://staff.fnwi.uva.nl/r.vandenboomgaard/IPCV20172018/LectureNotes/MATH/homogenous.html :]
+# [: Citation http://www.songho.ca/math/homogeneous/homogeneous.html :]
 
 # Convert into homogenous coordinates
 def toH(v):
